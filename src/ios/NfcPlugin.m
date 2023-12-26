@@ -248,7 +248,14 @@
     if (error.code == NFCReaderSessionInvalidationErrorFirstNDEFTagRead) { // not an error
         NSLog(@"Session ended after successful NDEF tag read");
         return;
-    } else {
+
+    // 2023-12-26 yoon: NFC Scan 취소 버튼 선택시 Indicator 추가함 ----- START
+    } else if (error.code == 200){
+        [self sendError:@"CANCEL"];
+        return;
+    } 
+    // 2023-12-26 yoon: NFC Scan 취소 버튼 선택시 Indicator 추가함 ----- END
+    else {
         [self sendError:error.localizedDescription];
     }
 }
