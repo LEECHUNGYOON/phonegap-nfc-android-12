@@ -250,7 +250,10 @@
         return;
 
     // 2023-12-26 yoon: NFC Scan 취소 버튼 선택시 Indicator 추가함 ----- START
-    } else if (error.code == 200){
+    // error code
+    // 200 -> 취소
+    // 201 -> 스캔 실행 후 오랫동안 동작이 없을 경우 자동으로 취소(session timeout)
+    } else if (error.code == 200 || error.code == 201){
         [self sendError:@"CANCEL"];
         return;
     } 
